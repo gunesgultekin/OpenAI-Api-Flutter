@@ -91,7 +91,7 @@ class _loginPageState extends State<loginPage> {
   Future<http.Response> checkLogin() async {
     if (_usernameController.text == '' || _passwordController.text == '') {
       _blankAlert();
-      return http.Response("Success", HttpStatus.unauthorized);
+      return http.Response("failed", HttpStatus.unauthorized);
     }
     try {
       await authService.login(
@@ -103,7 +103,7 @@ class _loginPageState extends State<loginPage> {
       if (preferences.getString('access_token') == '' ||
           preferences.getString('access_token') == null) {
         _loginAlert();
-        return http.Response("Success", HttpStatus.unauthorized);
+        return http.Response("failed", HttpStatus.unauthorized);
       } else {
         Navigator.push(
           context,
@@ -113,7 +113,7 @@ class _loginPageState extends State<loginPage> {
       }
     } on Exception catch (_) {
       _loginAlert();
-      return http.Response("failes", HttpStatus.unauthorized);
+      return http.Response("failed", HttpStatus.unauthorized);
     }
   }
 
